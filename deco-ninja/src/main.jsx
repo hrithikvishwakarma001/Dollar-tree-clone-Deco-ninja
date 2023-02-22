@@ -6,13 +6,14 @@ import "./index.css";
 import { extendTheme } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 const theme = extendTheme({
-		colors: {
-			root: {
-				green: "#12823b",
-				black: "#000000",
-				gray: "#121212",
-			},
+	colors: {
+		root: {
+			green: "#12823b",
+			black: "#000000",
+			gray: "#121212",
+			blueGray: "#171923",
 		},
+	},
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
