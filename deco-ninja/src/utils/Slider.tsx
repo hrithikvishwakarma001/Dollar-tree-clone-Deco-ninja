@@ -5,7 +5,6 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper";
 import { Image } from "@chakra-ui/react";
-
 interface Props {
 	src: string[];
 }
