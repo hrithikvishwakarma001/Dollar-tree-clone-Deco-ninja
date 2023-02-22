@@ -16,14 +16,15 @@ const Home = () => {
 				h='full'>
 				<VStack spacing='16'>
 					<Slider
+						withNavigation={false}
 						src={[
 							"https://www.dollartree.com/file/general/w_hero_st_patricks_day_1250x400_20230130.jpg",
 							"https://www.dollartree.com/file/general/w_hero_easter_1250x400_20230130.jpg",
 						]}
 					/>
 					<ShopGrid />
-					<Advertisement	
-					  round={true}
+					<Advertisement
+						round={true}
 						title='Gardening Supplies You’ll Dig'
 						subtitle={[
 							"Planeters & Pots",
@@ -34,6 +35,13 @@ const Home = () => {
 							"https://www.dollartree.com/file/general/w_3a_planters_pots400x400_20230129.jpg",
 							"https://www.dollartree.com/file/general/w_3a_gardening_gloves_tools_400x400_20230129.jpg",
 							"https://www.dollartree.com/file/general/w_3a_gardening_decor_400x400_20230129.jpg",
+						]}
+					/>
+					<Slider
+						withNavigation={true}
+						src={[
+							"https://www.dollartree.com/file/general/w_hero_st_patricks_day_1250x400_20230130.jpg",
+							"https://www.dollartree.com/file/general/w_hero_easter_1250x400_20230130.jpg",
 						]}
 					/>
 				</VStack>
