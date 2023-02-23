@@ -35,7 +35,7 @@ const ShopGrid = () => {
 			<Heading
         fontWeight={'semibold'}
 				fontSize={useBreakpointValue({
-					base: "2xl",
+					base: "xl",
 					md: "3xl",
 					lg: "4xl",
 				})}>
@@ -76,7 +76,9 @@ const ShopGrid = () => {
 						xl: "repeat(5, 1fr)",
 					}}
 					gap={8}
-					mt='16'>
+					mt='16'
+					placeItems={{ base: "center", md: "start" }}
+					>
 					{products
 						.slice(0, 10)
 						.map(({ image: [{ src }], title }, idx) => {
@@ -85,10 +87,16 @@ const ShopGrid = () => {
 									key={idx}
 									transition='all 0.2s cubic-bezier(.08,.52,.52,1)'
 									_hover={{ transform: "scale(1.05)" }}
-									_active={{ transform: "scale(0.95)" }}>
-									<CardBody p='0' py='5' pt='0'
-                  bg={useColorModeValue('white', 'root.blueGray')}
-                  >
+									_active={{ transform: "scale(0.95)" }}
+									w={{ base: "80%", md: "100%" }}>
+									<CardBody
+										p='0'
+										py='5'
+										pt='0'
+										bg={useColorModeValue(
+											"white",
+											"root.blueGray"
+										)}>
 										<Image
 											src={src}
 											alt='Green double couch with wooden legs'
@@ -96,7 +104,9 @@ const ShopGrid = () => {
 											objectFit='cover'
 										/>
 										<Stack mt='6' spacing='3' px='4'>
-											<Heading size='sm'>{title}</Heading>
+											<Heading size='sm'
+											 isTruncated
+											>{title}</Heading>
 										</Stack>
 									</CardBody>
 								</Card>
