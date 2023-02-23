@@ -28,7 +28,7 @@ export default function NavFoot() {
 	const { isOpen, onToggle } = useDisclosure();
 
 	return (
-		<Box maxW={{ base: "100%", md: "90%", lg: "72%" }} mx='auto'>
+		<>
 			<Flex
 		  	display={{ base: "none", md: "none",lg:"flex" }}
 				bg={useColorModeValue("white", "root.black")}
@@ -42,7 +42,7 @@ export default function NavFoot() {
 						<DesktopNav />
 					</Flex>
 			</Flex>
-		</Box>
+		</>
 	);
 }
 

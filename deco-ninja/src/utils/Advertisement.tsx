@@ -11,12 +11,13 @@ const Advertisement = ({ title, subtitle, image,round }: Props) => {
     <Stack
       align={'center'}
       w={'100%'}
+      textAlign={'center'}
     >
       <Heading
         mb='12'
         fontWeight={'semibold'}
         fontSize={useBreakpointValue({
-          base: "2xl",
+          base: "xl",
           md: "3xl",
           lg: "4xl",
         })}>
@@ -24,7 +25,7 @@ const Advertisement = ({ title, subtitle, image,round }: Props) => {
       </Heading>
       <Stack
         direction={{ base: 'column', md: 'row' }}
-        w='full'
+        w={{ base: '60%', md: '100%' }}
         justifyContent={'space-between'}
         // border='1px solid #e2e8f0'
         >
@@ -32,17 +33,17 @@ const Advertisement = ({ title, subtitle, image,round }: Props) => {
           <>
             <VStack 
               key={index} 
-              w={round ? { base: '100%', md: '25%' } : { base: '100%', md:'48%'}}
+              w={round ? { base: '100%', md: '25%' } : { base: '100%', md:'22%'}}
             >
-              <Image src={image[index]} rounded={'1.8rem'} 
+              <Image src={image[index]}  
                {...(round && {rounded:'full'}) }
               />
               <Text fontSize={useBreakpointValue({
                 base: "lg",
                 md: "xl",
-                lg: "2xl",
+                lg: "lg",
               })}
-                fontWeight={'semibold'}
+                fontWeight={'thin'}
                 cursor={'pointer'}
               >{item}</Text>
             </VStack>
