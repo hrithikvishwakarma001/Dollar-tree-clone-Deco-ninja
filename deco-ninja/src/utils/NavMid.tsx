@@ -33,11 +33,12 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { VscSearch } from 'react-icons/vsc';
 import { AiOutlineShoppingCart, AiOutlineUserDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import Signup from "./Signup";
 export default function NavMid() {
 	const [show, setShow] = React.useState(true)
 	const [value, setValue] = React.useState("")
 	const { isOpen, onToggle } = useDisclosure();
-	const { colorMode, toggleColorMode } = useColorMode();
+	const { toggleColorMode } = useColorMode();
 	const imageSize = useBreakpointValue({ base: "50%", md: "50%", lg: "30%" });
 	const navigate = useNavigate()
 
@@ -51,6 +52,7 @@ export default function NavMid() {
 		{ name: "batteries", id: 5 },
 	]
 
+
 	return (
 		<>
 			<Flex
@@ -60,13 +62,13 @@ export default function NavMid() {
 				py={{ base: 2 }}
 				px={{ base: 4 }}
 				align={"center"}
-				position='sticky'
-				top='0'
-				zIndex={999}
+			position='sticky'
+			top='0'
+			zIndex={999}
 			>
 				<Flex
-					// flex={{ base: 1, md: "auto" }}
-					// ml={{ base: -2 }}
+					flex={{ base: 1, md: "auto" }}
+					ml={{ base: -2 }}
 					display={{ base: "flex", md: "none" }}>
 					<IconButton
 						onClick={onToggle}
@@ -130,12 +132,12 @@ export default function NavMid() {
 							py={2}
 						>
 							<Text
-						   fontSize={'md'}
-							 px={4}
-							 py={2}
-							 casing='uppercase'
+								fontSize={'md'}
+								px={4}
+								py={2}
+								casing='uppercase'
 								color='#7c8695'
-							 borderBottom='2px solid green'
+								borderBottom='2px solid green'
 							>Tending Searches</Text>
 							{searchArray.map((item) => {
 								return (
@@ -168,7 +170,7 @@ export default function NavMid() {
 					color={useColorModeValue("root.green", "gray.400")}
 				>
 					<Switch size='md' onChange={toggleColorMode}
-						w='1rem' mr={{ base: "3", md: "5" }} colorScheme={'green'}></Switch>
+					colorScheme={'green'}></Switch>
 					<HStack
 						pos={'relative'}
 						right='1.4rem'
@@ -178,10 +180,7 @@ export default function NavMid() {
 						<Text>Shop</Text>
 						<Image src='https://www.dollartree.com/file/general/dt_plus_pdp_plp_200x70.png' w='20' h='6' />
 					</HStack>
-					<VStack spacing='0'>
-						<AiOutlineUserDelete size='1.5rem' />
-						<Text fontSize={'xs'}>Account</Text>
-					</VStack >
+					<Signup />
 					<VStack spacing='0' mr='1rem'>
 						<AiOutlineShoppingCart size='1.5rem' />
 						<Text fontSize={'xs'}>Cart</Text>
@@ -195,98 +194,6 @@ export default function NavMid() {
 		</>
 	);
 }
-
-const DesktopNav = () => {
-	const linkColor = useColorModeValue("gray.600", "gray.200");
-	const linkHoverColor = useColorModeValue("gray.800", "white");
-	const popoverContentBgColor = useColorModeValue("white", "gray.800");
-
-	return (
-		<Stack direction={"row"} spacing={4}>
-			{NAV_ITEMS.map((navItem) => (
-				<Box key={navItem.label}>
-					<Popover trigger={"hover"} placement={"bottom-start"}>
-						<PopoverTrigger>
-							<Link
-								p={2}
-								href={navItem.href ?? "#"}
-								fontSize={"sm"}
-								fontWeight={500}
-								color={linkColor}
-								_hover={{
-									textDecoration: "none",
-									color: linkHoverColor,
-								}}>
-								{navItem.label}
-							</Link>
-						</PopoverTrigger>
-
-						{navItem.children && (
-							<PopoverContent
-								border={0}
-								boxShadow={"xl"}
-								bg={popoverContentBgColor}
-								p={4}
-								rounded={"xl"}
-								minW={"sm"}>
-								<Stack>
-									{navItem.children.map((child) => (
-										<DesktopSubNav
-											key={child.label}
-											{...child}
-										/>
-									))}
-								</Stack>
-							</PopoverContent>
-						)}
-					</Popover>
-				</Box>
-			))}
-		</Stack>
-	);
-};
-
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
-	return (
-		<Link
-			href={href}
-			role={"group"}
-			display={"block"}
-			p={2}
-			rounded={"md"}
-			_hover={{ bg: useColorModeValue("pink.50", "gray.900") }}>
-			<Stack direction={"row"} align={"center"}>
-				<Box>
-					<Text
-						transition={"all .3s ease"}
-						_groupHover={{ color: "pink.400" }}
-						fontWeight={500}>
-						{label}
-					</Text>
-					<Text fontSize={"sm"}>{subLabel}</Text>
-				</Box>
-				<Flex
-					transition={"all .3s ease"}
-					transform={"translateX(-10px)"}
-					opacity={0}
-					_groupHover={{
-						opacity: "100%",
-						transform: "translateX(0)",
-					}}
-					justify={"flex-end"}
-					align={"center"}
-					flex={1}>
-					<Icon
-						color={"pink.400"}
-						w={5}
-						h={5}
-						as={ChevronRightIcon}
-					/>
-				</Flex>
-			</Stack>
-		</Link>
-	);
-};
 
 const MobileNav = () => {
 	return (
