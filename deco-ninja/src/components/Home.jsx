@@ -2,13 +2,11 @@ import { Box, Container, Flex, Stack, VStack } from "@chakra-ui/react";
 import React from "react";
 import Slider from "../utils/Slider";
 import "../index.css";
-import { ScrollTopButton } from "../utils/ScrollTopButton";
 import ShopGrid from "../utils/ShopGrid";
 import Advertisement from "../utils/Advertisement";
 const Home = () => {
 	return (
 		<>
-			<ScrollTopButton />
 			<Container
 				maxW={{ base: "100%", md: "90%", lg: "72%" }}
 				mt='8'

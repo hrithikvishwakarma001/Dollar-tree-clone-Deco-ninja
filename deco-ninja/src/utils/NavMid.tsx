@@ -9,7 +9,6 @@ import {
 	Stack,
 	Collapse,
 	Icon,
-	Link,
 	Popover,
 	PopoverTrigger,
 	PopoverContent,
@@ -30,6 +29,7 @@ import {
 	ChevronDownIcon,
 	ChevronRightIcon,
 } from "@chakra-ui/icons";
+import {Link} from "react-router-dom"
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { VscSearch } from 'react-icons/vsc';
 import { AiOutlineShoppingCart, AiOutlineUserDelete } from "react-icons/ai";
@@ -193,8 +193,10 @@ export default function NavMid() {
 					</HStack>
 					<Signup />
 					<VStack spacing='0'
-					//  pos={'relative'}
-					//  right='0.6rem'
+					 pos={'relative'}
+					 right='0.6rem'
+					 onClick={() => navigate('/cart')}
+					 cursor='pointer'
 					>
 						<AiOutlineShoppingCart size='1.5rem' />
 						<Text fontSize={'xs'}>Cart</Text>
@@ -263,7 +265,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 					align={"start"}>
 					{children &&
 						children.map((child) => (
-							<Link key={child.label} py={2} href={child.href} color={useColorModeValue("gray.600", "gray.400")}>
+							<Link key={child.label}  to={'/inventory'} color={useColorModeValue("gray.600", "gray.400")}>
 								{child.label}
 							</Link>
 						))}

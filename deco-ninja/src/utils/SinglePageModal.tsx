@@ -18,11 +18,21 @@ import {
 	Td,
 	TableContainer,
 	Image,
-	useColorModeValue
+	useColorModeValue,
+	Box,
 } from "@chakra-ui/react";
+import FileSaver from "file-saver";
 export default function SinglePageModal({ product }: { product: any }) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const { title, price, image: [{ src, dataAltImage }], category, swatches: [{ colorCode, colorName }], articleCode } = product;
+	const [zoom, setZoom] = React.useState(false);
+	const {
+		title,
+		price,
+		image: [{ src, dataAltImage }],
+		category,
+		swatches: [{ colorCode, colorName }],
+		articleCode,
+	} = product;
 
 	const handleClick = () => {
 		onOpen();
@@ -34,7 +44,11 @@ export default function SinglePageModal({ product }: { product: any }) {
 		category: category,
 		color_name: colorName,
 		color_Code: colorCode,
-		id: articleCode
+		id: articleCode,
+	};
+
+	async function handleDownload(_id, photo) {
+		FileSaver.saveAs(photo, `download-${_id}deco-ninja.png`);
 	}
 	return (
 		<>
@@ -42,16 +56,22 @@ export default function SinglePageModal({ product }: { product: any }) {
 				Details
 			</Button>
 
-			<Modal onClose={onClose} isOpen={isOpen} scrollBehavior={"inside"} size='5xl'>
+			<Modal
+				onClose={onClose}
+				isOpen={isOpen}
+				scrollBehavior={"inside"}
+				size='5xl'>
 				<ModalOverlay />
-				<ModalContent bg={useColorModeValue('gray.50', 'root.black')}>
+				<ModalContent bg={useColorModeValue("gray.50", "root.black")}>
 					<ModalHeader>Product detail</ModalHeader>
 					<ModalCloseButton />
-					<ModalBody
-						
-					>
+					<ModalBody>
 						<TableContainer>
-							<Table size='sm'>
+							<Table size='sm'
+								cursor={{
+									base: 'all-scroll', md: 'default'
+								}}
+							>
 								<Thead>
 									<Tr>
 										{Object.keys(mainData).map((key) => (
@@ -61,14 +81,40 @@ export default function SinglePageModal({ product }: { product: any }) {
 								</Thead>
 								<Tbody>
 									<Tr>
-										{Object.values(mainData).map((value,idx) => (
-											idx === 4 ? <Td key={value} bg={value}>{value}</Td> : <Td key={value}>{value}</Td>
-										))}
+										{Object.values(mainData).map(
+											(value, idx) =>
+												idx === 4 ? (
+													<Td key={value} bg={value}>
+														{value}
+													</Td>
+												) : (
+													<Td key={value}>{value}</Td>
+												)
+										)}
 									</Tr>
 								</Tbody>
 							</Table>
 						</TableContainer>
-            <Image src={src} alt={'img1'} w='50%' mx='auto' mt='2rem'/>
+						<Box
+							mt='2rem'
+							w='100%'
+							display={"flex"}
+							justifyContent='flex-end'>
+							<Button
+								size='sm'
+								onClick={() => handleDownload(articleCode, src)}
+							>Download Image</Button>
+						</Box>
+						<Image
+							onClick={() => setZoom(!zoom)}
+							transition="all 0.2s ease-out"
+							src={src}
+							alt={"img1"}
+							w={zoom ? '100%' : '50%'}
+							mx='auto'
+							mt='2rem'
+							cursor={zoom ? 'zoom-out' : 'zoom-in'}
+						/>
 					</ModalBody>
 					<ModalFooter>
 						<Button onClick={onClose}>Close</Button>
