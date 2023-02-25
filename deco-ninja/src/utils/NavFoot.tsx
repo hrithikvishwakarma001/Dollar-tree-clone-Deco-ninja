@@ -23,6 +23,7 @@ import {
 	ChevronDownIcon,
 	ChevronRightIcon,
 } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 
 export default function NavFoot() {
 	const { isOpen, onToggle } = useDisclosure();
@@ -134,10 +135,11 @@ const DesktopNav = () => {
 	);
 };
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, subLabel }: NavItem) => {
+	const navigate = useNavigate();
 	return (
 		<Link
-			href={href}
+		 onClick={() => navigate("/inventory")}
 			role={"group"}
 			display={"block"}
 			p={2}

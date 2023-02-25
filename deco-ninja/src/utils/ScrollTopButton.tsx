@@ -9,7 +9,7 @@ export function ScrollTopButton() {
     bg: useColorModeValue('gray.300', 'green.400')
   }}>
     <VStack spacing={0}>
-      <ChevronUpIcon fontSize={'2xl'} />
+      <ChevronUpIcon fontSize={'3xl'} />
       <Text>Top</Text>
     </VStack>
   </Button>;

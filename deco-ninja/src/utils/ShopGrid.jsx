@@ -15,7 +15,7 @@ import axios from "axios";
 import React from "react";
 
 const ShopGrid = () => {
-	const url = "https://swanky-elated-magnosaurus.glitch.me/products";
+	const url = "https://diagnostic-boiled-shift.glitch.me/products";
 	const [products, setProducts] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
 
