@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
 	Box,
@@ -39,7 +40,7 @@ export default function NavMid() {
 	const [value, setValue] = React.useState("")
 	const { isOpen, onToggle } = useDisclosure();
 	const { toggleColorMode } = useColorMode();
-	const imageSize = useBreakpointValue({ base: "50%", md: "50%", lg: "30%" });
+	const imageSize = useBreakpointValue({ base: "40%", md: "50%", lg: "25%" });
 	const navigate = useNavigate()
 
 	const searchArray = [
@@ -59,16 +60,13 @@ export default function NavMid() {
 				bg={useColorModeValue("white", "root.black")}
 				color={useColorModeValue("gray.600", "white")}
 				minH={"60px"}
-				py={{ base: 2 }}
-				px={{ base: 4 }}
+				py={{ base: 3 }}
+				px={{ base: 2 }}
 				align={"center"}
-			position='sticky'
-			top='0'
-			zIndex={999}
 			>
 				<Flex
 					flex={{ base: 1, md: "auto" }}
-					ml={{ base: -2 }}
+					ml={{ base: -1 }}
 					display={{ base: "flex", md: "none" }}>
 					<IconButton
 						onClick={onToggle}
@@ -84,11 +82,11 @@ export default function NavMid() {
 					/>
 				</Flex>
 				<Flex
-					flex={{ base: 1 }}>
+					flex={{ base: 4 }}>
 					<Image
 						onClick={() => navigate('/')}
 						cursor='pointer'
-						mr={{ base: "5rem", md: "0" }}
+						// mr={{ base: "5rem", md: "0" }}
 						srcSet='https://gdurl.com/AkqI 2x,https://gdurl.com/XV3f 1x, https://gdurl.com/XV3f 3x'
 						alt='logo'
 						w={imageSize}
@@ -120,21 +118,23 @@ export default function NavMid() {
 							<VscSearch size='1.2rem' color='gray.500' />
 						</Button>
 						<VStack spacing='0' mr='1rem'
-							display={show && 'none'}
+						  display={show? 'none' : 'block'}
 							position={'absolute'}
-							top='68%'
-							left='28.7%'
+							left='32.6%'
+							top='175'
 							right='initial'
-							width='452px'
-							zIndex={999}
+							width='27.2%'
+							zIndex={800}
 							boxShadow='0 0 10px 0 rgba(0,0,0,0.2)'
 							bg={useColorModeValue("gray.100", "root.blueGray")}
 							py={2}
 						>
 							<Text
+							  w = '100%'
 								fontSize={'md'}
 								px={4}
 								py={2}
+								mb='3'
 								casing='uppercase'
 								color='#7c8695'
 								borderBottom='2px solid green'
@@ -144,6 +144,7 @@ export default function NavMid() {
 									<option value={item.name} key={item.id}
 										onClick={() => setValue(item.name)}
 										style={{
+											width : '100%',
 											display: 'flex',
 											alignItems: 'center',
 											padding: '0.4rem 1rem',
@@ -165,7 +166,7 @@ export default function NavMid() {
 					justify={"flex-end"}
 					align={"center"}
 					direction={"row"}
-					spacing={{ base: 6, md: 8, lg: 14 }}
+					spacing={{ base: 6, md: 8, lg: 10 }}
 					// border='1px solid red'
 					color={useColorModeValue("root.green", "gray.400")}
 				>
@@ -173,7 +174,7 @@ export default function NavMid() {
 					colorScheme={'green'}></Switch>
 					<HStack
 						pos={'relative'}
-						right='1.4rem'
+						right='1rem'
 						display={{ base: "none", md: "flex" }}
 						w='60px'
 					>
@@ -181,7 +182,10 @@ export default function NavMid() {
 						<Image src='https://www.dollartree.com/file/general/dt_plus_pdp_plp_200x70.png' w='20' h='6' />
 					</HStack>
 					<Signup />
-					<VStack spacing='0' mr='1rem'>
+					<VStack spacing='0'
+					//  pos={'relative'}
+					//  right='0.6rem'
+					>
 						<AiOutlineShoppingCart size='1.5rem' />
 						<Text fontSize={'xs'}>Cart</Text>
 					</VStack>

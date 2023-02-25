@@ -4,7 +4,7 @@ export const HelperContext = React.createContext();
 const inintalState = {
 	isAuth: false,
 	user: null,
-  loading: false,
+  loading: true,
   error: null,
   data: [],
 };
@@ -24,7 +24,7 @@ const reducer = (state, action) => {
 			};
 		case "LOADING": return {
         ...state,
-        loading: true,
+        loading: false,
       };
     case "ERROR": return {
         ...state,

@@ -27,6 +27,7 @@ import { HelperContext } from '../context/HelperProvider';
 import { useNavigate } from 'react-router-dom';
 import { FaUserAltSlash } from 'react-icons/fa';
 import Live from './Live';
+import Logout from './Logout';
 
 export default function Signup() {
 	const navigate = useNavigate();
@@ -58,7 +59,7 @@ export default function Signup() {
 					isClosable: true,
 				})
 				onClose();
-			} else if(data.email || data.password) {
+			} else if(data.email.length==0 || data.password.length==0) {
 				toast({
 					description: 'Please fill all the fields.',
 					status: 'warning',
@@ -82,27 +83,16 @@ export default function Signup() {
 		<>
 			{
 				!state.isAuth
-					? <VStack spacing='0' onClick={onOpen} cursor='pointer'  >
+					? <VStack spacing='0' onClick={onOpen} cursor='pointer' 
+	          // pos={'relative'}
+						// left = {'1rem'}
+					>
 						<AiOutlineUserDelete size='1.5rem' />
 						<Text fontSize={'xs'}>Account</Text>
 					</VStack >
 					: (
 						<>
-							<HStack spacing='5' >
-								<Tag size='lg' cursor='pointer' bg={useColorModeValue('gray.200', 'gray.800')} color={useColorModeValue('black', 'gray.400')}
-							  fontWeight='semibold' 
-								display={'flex'}
-								alignItems={'center'}
-								justifyContent={'center'}
-								>{state.user?.firstName.toUpperCase()}
-									&nbsp;&nbsp;
-								<Live/>
-								</Tag>
-								<VStack spacing='0' cursor='pointer' >
-									<FaUserAltSlash size='1.5rem' />
-									<Text fontSize={'xs'}>Logout</Text>
-								</VStack >
-							</HStack>
+							<Logout name={state.user?.firstName.toUpperCase()}/>
 						</>
 					)
 			}
