@@ -19,16 +19,57 @@ import {
 } from "@chakra-ui/react";
 import { Rating } from "./SlidesCard";
 const SideBar = () => {
-	const RATING = [
-	<Rating rating='5' numReviews={1}/>,
-	<Rating rating='4' numReviews={1}/>,
-	<Rating rating='3' numReviews={1}/>,
-	<Rating rating='2' numReviews={1}/>,
-	<Rating rating='1' numReviews={1}/>,
-];
-
 	const [show, setShow] = React.useState(false);
 	const handleToggle = () => setShow(!show);
+
+	const RATING = [
+		<Rating rating='5' numReviews={1} />,
+		<Rating rating='4' numReviews={1} />,
+		<Rating rating='3' numReviews={1} />,
+		<Rating rating='2' numReviews={1} />,
+		<Rating rating='1' numReviews={1} />,
+	];
+
+	const BRAND = [
+		"Crafte's Square",
+		"Kraftly",
+		"Mikale",
+		"Osbond jhola",
+		"Floral jonasan",
+	];
+
+	const MATERIAL = [
+		"Leather",
+		"Wood",
+		"Metal",
+		"Plastic",
+		"Glass",
+		"Paper",
+		"Stone",
+		"Fabric",
+		"Other",
+	];
+
+	const COLOR = [
+		"Black",
+		"White",
+		"Red",
+		"Green",
+		"Blue",
+		"Yellow",
+		"Orange",
+		"Purple",
+		"Brown",
+		"Grey",
+		"Other",
+	];
+
+		const FINISH = [
+		"Matte",
+		"Glossy",
+		"Metallic",
+		"Other",
+	];
 
 	return (
 		<>
@@ -36,7 +77,7 @@ const SideBar = () => {
 				<AccordionItem mb={4}>
 					<AccordionButton>
 						<Box as='span' flex='1' textAlign='left'>
-						AVERAGE RATING AND UP
+							AVERAGE RATING AND UP
 						</Box>
 						<AccordionIcon />
 					</AccordionButton>
@@ -75,8 +116,26 @@ const SideBar = () => {
 						<AccordionIcon />
 					</AccordionButton>
 					<AccordionPanel pb={4}>
-						<Collapse startingHeight={240} in={show}>
-							{RATING.map((location, id) => (
+						<Collapse startingHeight={120}>
+							{BRAND.map((location, id) => (
+								<HStack spacing={4} key={id}>
+									<Checkbox />
+									<FormLabel>{location}</FormLabel>
+								</HStack>
+							))}
+						</Collapse>
+					</AccordionPanel>
+				</AccordionItem>
+				<AccordionItem mb={4}>
+					<AccordionButton>
+						<Box as='span' flex='1' textAlign='left'>
+							MATERIAL BASE
+						</Box>
+						<AccordionIcon />
+					</AccordionButton>
+					<AccordionPanel pb={4}>
+						<Collapse startingHeight={120} in={show}>
+							{MATERIAL.map((location, id) => (
 								<HStack spacing={4} key={id}>
 									<Checkbox />
 									<FormLabel>{location}</FormLabel>
@@ -86,6 +145,45 @@ const SideBar = () => {
 						<Button size='sm' onClick={handleToggle} mt='1rem'>
 							Show {show ? "Less" : "More"}
 						</Button>
+					</AccordionPanel>
+				</AccordionItem>
+				<AccordionItem mb={4}>
+					<AccordionButton>
+						<Box as='span' flex='1' textAlign='left'>
+							COLOR
+						</Box>
+						<AccordionIcon />
+					</AccordionButton>
+					<AccordionPanel pb={4}>
+						<Collapse startingHeight={120} in={show}>
+							{COLOR.map((location, id) => (
+								<HStack spacing={4} key={id}>
+									<Checkbox />
+									<FormLabel>{location}</FormLabel>
+								</HStack>
+							))}
+						</Collapse>
+						<Button size='sm' onClick={handleToggle} mt='1rem'>
+							Show {show ? "Less" : "More"}
+						</Button>
+					</AccordionPanel>
+				</AccordionItem>
+				<AccordionItem mb={4}>
+					<AccordionButton>
+						<Box as='span' flex='1' textAlign='left'>
+							FINISH BASE
+						</Box>
+						<AccordionIcon />
+					</AccordionButton>
+					<AccordionPanel pb={4}>
+						<Collapse startingHeight={120} >
+							{FINISH.map((location, id) => (
+								<HStack spacing={4} key={id}>
+									<Checkbox />
+									<FormLabel>{location}</FormLabel>
+								</HStack>
+							))}
+						</Collapse>
 					</AccordionPanel>
 				</AccordionItem>
 			</Accordion>

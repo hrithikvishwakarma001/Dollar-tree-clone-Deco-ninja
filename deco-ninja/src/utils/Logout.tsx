@@ -63,6 +63,7 @@ export default function Logout({name}) {
 						<Button colorScheme='red' ml={3}
 							onClick={() => {
 								dispatch({type: 'LOGOUT'});
+								localStorage.removeItem('user');
 								onClose();
 								toast({
 									title: 'You have been logged out.',

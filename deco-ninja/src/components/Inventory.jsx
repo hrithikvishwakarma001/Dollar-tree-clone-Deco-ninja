@@ -17,13 +17,14 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { HelperContext } from "../context/HelperProvider";
 import Bredcrumbs from "../utils/Bredcrumbs";
 import Shopping from "../utils/Shopping";
 import SideBar from "../utils/SideBar";
 import SortComp from "../utils/SortComp";
 
 const Inventory = () => {
-	// const { setSearch, totalCar } = React.useContext(DateContext);
+	const { state } = React.useContext(HelperContext);
 
 	return (
 		<div>
@@ -37,8 +38,8 @@ const Inventory = () => {
 					align={"flex-start"}>
 					<Stack
 						// border='1px solid green'
-						width={"100%"}
-						height={"100vh"}
+						width={{ base: "100%", md: "40%", lg: "40%" }}
+						height={"full"}
 						display={"flex"}
 						flexDirection={"column"}
 						justifyContent={"flex-start"}
@@ -46,23 +47,33 @@ const Inventory = () => {
 						bg={useColorModeValue("white", "black")}
 						p={4}>
 						<VStack>
-							<HStack w={"100%"}>
-								<FormLabel>
-									<Text
-										fontWeight={"bold"}
-										fontSize='larger'
-										mb='1'>
-										44 Items Found
-									</Text>
-								</FormLabel>
+							<HStack
+								w={"100%"}
+								spacing='0'
+								justifyContent={"space-between"}
+								alignItems={"center"}>
+								<Code
+									px={2}
+									colorScheme={"green"}
+									fontWeight={"bold"}
+									fontSize='large'>
+									Total {state.total} Items Found
+								</Code>
+								<Code
+									px={2}
+									colorScheme={"green"}
+									fontWeight={"bold"}
+									fontSize='large'>
+									Page {state.page}
+								</Code>
 							</HStack>
 						</VStack>
 						<SideBar />
 					</Stack>
-					<Stack 
-					// border={"2px solid brown"}
-						width={"100%"}
-					>
+
+
+					<Stack
+						width={"100%"}>
 						<HStack w={"100%"} justifyContent={"flex-end"}>
 							<Text fontWeight={"bold"} mb='1'>
 								Sort by
