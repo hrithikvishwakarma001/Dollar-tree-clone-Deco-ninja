@@ -13,9 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
+import SinglePageModal from './SinglePageModal';
 
 const data = {
-  rating: 4.2,
+  rating: Math.floor(Math.random() * 5) + 1,
   numReviews: 34
 };
 interface RatingProps {
@@ -26,7 +27,7 @@ interface RatingProps {
 export function Rating({ rating, numReviews }: RatingProps) {
   return (
     <Box display="flex" alignItems="center"
-      mt={numReviews==1?'0.3rem':'3'}
+      mt={numReviews == 1 ? '0.3rem' : '3'}
     >
       {Array(5)
         .fill('')
@@ -35,33 +36,32 @@ export function Rating({ rating, numReviews }: RatingProps) {
           if (roundedRating - i >= 1) {
             return (
               <BsStarFill
-                key={i+Math.random()}
+                key={i + Math.random()}
                 style={{ marginLeft: '1' }}
-                // color={i < rating ? 'green.500' :"green.300"}
+              // color={i < rating ? 'green.500' :"green.300"}
               />
             );
           }
           if (roundedRating - i === 0.2) {
-            return <BsStarHalf key={i + Math.random()} style={{ marginLeft: '1',}}/>;
+            return <BsStarHalf key={i + Math.random()} style={{ marginLeft: '1', }} />;
           }
-          return <BsStar key={i + Math.random()} style={{ marginLeft: '1',}} />;
+          return <BsStar key={i + Math.random()} style={{ marginLeft: '1', }} />;
         })}
       <Box as="span" ml="2" color="gray.600" fontSize="sm"
-        display={numReviews==1?'none':'flex'}
+        display={numReviews == 1 ? 'none' : 'flex'}
       >
-        {numReviews * Math.floor(Math.random() * 10) + 200} 
+        {numReviews * Math.floor(Math.random() * 10) + 200}
       </Box>
     </Box>
   );
 }
 
-export default function SlidesCard({ title, price, src,padding }: { title: string, price: number, src: string,padding?:number|string }) {
-  
+export default function SlidesCard({ title, price, src, padding, singleData }: { title: string, price: number, src: string, padding?: number | string, singleData: any }) {
+
   const randomBolean = () => Math.random() >= 0.5;
-
+  //  console.log(singleData)
   return (
-    <Flex p={padding?padding:50} alignItems="center" justifyContent="center"
-
+    <Flex p={padding ? padding : 50} alignItems="center" justifyContent="center"
     >
       <Box
         transition='all 0.2s cubic-bezier(.08,.52,.52,1)'
@@ -83,7 +83,7 @@ export default function SlidesCard({ title, price, src,padding }: { title: strin
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
           w='60'
-          h='280px'
+          h='290px'
           roundedTop="lg"
         >
         </Box>
@@ -98,7 +98,7 @@ export default function SlidesCard({ title, price, src,padding }: { title: strin
               <Badge rounded="full" fontSize="0.7em" colorScheme="red">
                 Trending
               </Badge>
-            ) }
+            )}
           </Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
@@ -121,18 +121,18 @@ export default function SlidesCard({ title, price, src,padding }: { title: strin
               </chakra.a>
             </Tooltip>
           </Flex>
-
           <Flex justifyContent="space-between" alignContent="center" mt='2'>
-            <Rating rating={data.rating} numReviews={data.numReviews} />
+            <Rating rating={randomBolean() ? data.rating : (Math.floor(Math.random() * 5) + 1)} numReviews={data.numReviews} />
             <Code fontSize="md" color={useColorModeValue('gray.800', 'black')} mt='3'
               fontWeight="bold"
               bg={useColorModeValue('yellow.100', 'yellow.200')}
-             letterSpacing={0}
-             fontFamily={'caveat'}
+              letterSpacing={0}
+              fontFamily={'caveat'}
             >
               {price}
             </Code>
           </Flex>
+          <SinglePageModal product={singleData}/>
         </Box>
       </Box>
     </Flex>

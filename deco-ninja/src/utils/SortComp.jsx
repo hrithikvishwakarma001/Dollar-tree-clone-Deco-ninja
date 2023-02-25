@@ -40,6 +40,7 @@ const SortComp = () => {
 		<div>
 			<Menu closeOnSelect={false} w='100%'>
 				<MenuButton
+					
 					as={Button}
 					bg={useColorModeValue("gray.100", "root.blueGray")}>
 					Select your options

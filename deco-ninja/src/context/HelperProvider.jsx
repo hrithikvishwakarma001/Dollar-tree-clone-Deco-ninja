@@ -7,6 +7,9 @@ const inintalState = {
   loading: true,
   error: null,
   data: [],
+  total: 0,
+  page: 1,
+  searchValue: '',
 };
 
 const reducer = (state, action) => {
@@ -35,6 +38,21 @@ const reducer = (state, action) => {
       ...state,
       loading: false,
       data: payload,
+    }
+    case "TOTAL": return {
+      ...state,
+      loading: false,
+      total: payload,
+    }
+    case "PAGE": return {
+      ...state,
+      loading: false,
+      page: payload,
+    }
+    case "SEARCH": return {
+      ...state,
+      loading: false,
+      searchValue: payload,
     }
     default: return state;
 	}

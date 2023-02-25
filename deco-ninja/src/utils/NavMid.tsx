@@ -35,7 +35,9 @@ import { VscSearch } from 'react-icons/vsc';
 import { AiOutlineShoppingCart, AiOutlineUserDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Signup from "./Signup";
+import { HelperContext } from "../context/HelperProvider";
 export default function NavMid() {
+	const {state,dispatch} = React.useContext(HelperContext)
 	const [show, setShow] = React.useState(true)
 	const [value, setValue] = React.useState("")
 	const { isOpen, onToggle } = useDisclosure();
@@ -52,8 +54,14 @@ export default function NavMid() {
 		{ name: "basket", id: 5 },
 		{ name: "batteries", id: 5 },
 	]
-
-
+	const handleClick = (e: any) => {
+		e.preventDefault()
+		if(value.length>0){
+			dispatch({ type: 'SEARCH', payload: value })
+		  navigate('/inventory')
+			setShow(!show)
+		}
+	}
 	return (
 		<>
 			<Flex
@@ -114,16 +122,18 @@ export default function NavMid() {
 							onClick={() => setShow(!show)}
 							onChange={(e) => setValue(e.target.value)}
 						/>
-						<Button rounded={'none'} bg={useColorModeValue("gray.100", "gray.900")} _hover={{ bg: `{useColorModeValue("gray.100", "gray.900")}` }}>
+						<Button rounded={'none'} bg={useColorModeValue("gray.100", "gray.900")} _hover={{ bg: `{useColorModeValue("gray.100", "gray.900")}` }}
+						onClick={handleClick}
+						>
 							<VscSearch size='1.2rem' color='gray.500' />
 						</Button>
 						<VStack spacing='0' mr='1rem'
 						  display={show? 'none' : 'block'}
 							position={'absolute'}
-							left='32.6%'
+							left={state.isAuth ? '31.4%' :"32.6%"}
 							top='175'
 							right='initial'
-							width='27.2%'
+							width={state.isAuth ? '24.6%' : "27.2%"}
 							zIndex={800}
 							boxShadow='0 0 10px 0 rgba(0,0,0,0.2)'
 							bg={useColorModeValue("gray.100", "root.blueGray")}

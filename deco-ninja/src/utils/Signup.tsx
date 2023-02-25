@@ -50,7 +50,9 @@ export default function Signup() {
 			const user = await response.json();
 			const check = user.filter((user: User) => user.email === data.email && user.password === data.password);
 			if (check.length > 0) {
-				dispatch({ type: 'LOGIN', payload: check[0] })
+				localStorage.setItem('user', JSON.stringify(check[0]));
+				dispatch({ type: 'LOGIN' })
+				navigate('/');
 				toast({
 					title: 'Account created.',
 					description: 'We\'ve created your account for you.',
@@ -79,6 +81,12 @@ export default function Signup() {
 		fetchData(data)
 	}
 
+	const user = JSON.parse(localStorage.getItem('user') || '{}');
+	React.useEffect(() => {
+		 if (Object.keys(user).length > 0) {
+			 dispatch({ type: 'LOGIN'})
+		}
+	}, [])
 	return (
 		<>
 			{
@@ -92,7 +100,7 @@ export default function Signup() {
 					</VStack >
 					: (
 						<>
-							<Logout name={state.user?.firstName.toUpperCase()}/>
+							<Logout name={user?.firstName.toUpperCase()}/>
 						</>
 					)
 			}

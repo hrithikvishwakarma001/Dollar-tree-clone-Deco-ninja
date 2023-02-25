@@ -10,7 +10,7 @@ const theme = extendTheme({
 	colors: {
 		root: {
 			green: "#12823b",
-			black: "#1c1c27",
+			black: "#13131b",
 			gray: "#000000",
 			blueGray: "#000000",
 		},

@@ -67,6 +67,7 @@ export default function SlideShow({ src, withNavigation }: Props) {
 									title={title}
 									price={price}
 									src={src}
+									singleData={item}
 								/>
 							</SwiperSlide>
 						})}
