@@ -4,7 +4,14 @@ import Slider from "../utils/Slider";
 import "../index.css";
 import ShopGrid from "../utils/ShopGrid";
 import Advertisement from "../utils/Advertisement";
+import { HelperContext } from "../context/HelperProvider";
 const Home = () => {
+	const {dispatch} = React.useContext(HelperContext);
+	const cartItems = JSON.parse(localStorage.getItem("cart"));
+	React.useEffect(() => {
+		const cartCount = cartItems ? cartItems.length : 0;
+		dispatch({ type: "CART_TOTAL", payload: cartCount });
+	}, [cartItems]);
 	return (
 		<>
 			<Container

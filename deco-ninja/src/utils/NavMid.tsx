@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
 	Box,
@@ -22,6 +21,7 @@ import {
 	VStack,
 	LinkOverlay,
 	Switch,
+	Circle,
 } from "@chakra-ui/react";
 import {
 	HamburgerIcon,
@@ -29,22 +29,21 @@ import {
 	ChevronDownIcon,
 	ChevronRightIcon,
 } from "@chakra-ui/icons";
-import {Link} from "react-router-dom"
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { VscSearch } from 'react-icons/vsc';
+import { Link } from "react-router-dom";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { VscSearch } from "react-icons/vsc";
 import { AiOutlineShoppingCart, AiOutlineUserDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Signup from "./Signup";
 import { HelperContext } from "../context/HelperProvider";
 export default function NavMid() {
-	const {state,dispatch} = React.useContext(HelperContext)
-	const [show, setShow] = React.useState(true)
-	const [value, setValue] = React.useState("")
+	const { state, dispatch } = React.useContext(HelperContext);
+	const [show, setShow] = React.useState(true);
+	const [value, setValue] = React.useState("");
 	const { isOpen, onToggle } = useDisclosure();
 	const { toggleColorMode } = useColorMode();
 	const imageSize = useBreakpointValue({ base: "40%", md: "50%", lg: "25%" });
-	const navigate = useNavigate()
-
+	const navigate = useNavigate();
 	const searchArray = [
 		{ name: "vases", id: 1 },
 		{ name: "kitchen kit", id: 2 },
@@ -53,15 +52,15 @@ export default function NavMid() {
 		{ name: "spoon", id: 5 },
 		{ name: "basket", id: 5 },
 		{ name: "batteries", id: 5 },
-	]
+	];
 	const handleClick = (e: any) => {
-		e.preventDefault()
-		if(value.length>0){
-			dispatch({ type: 'SEARCH', payload: value })
-		  navigate('/inventory')
-			setShow(!show)
+		e.preventDefault();
+		if (value.length > 0) {
+			dispatch({ type: "SEARCH", payload: value });
+			navigate("/inventory");
+			setShow(!show);
 		}
-	}
+	};
 	return (
 		<>
 			<Flex
@@ -70,8 +69,7 @@ export default function NavMid() {
 				minH={"60px"}
 				py={{ base: 3 }}
 				px={{ base: 2 }}
-				align={"center"}
-			>
+				align={"center"}>
 				<Flex
 					flex={{ base: 1, md: "auto" }}
 					ml={{ base: -1 }}
@@ -89,28 +87,36 @@ export default function NavMid() {
 						aria-label={"Toggle Navigation"}
 					/>
 				</Flex>
-				<Flex
-					flex={{ base: 4 }}>
+				<Flex flex={{ base: 4 }}>
 					<Image
-						onClick={() => navigate('/')}
+						onClick={() => navigate("/")}
 						cursor='pointer'
 						// mr={{ base: "5rem", md: "0" }}
 						srcSet='https://gdurl.com/AkqI 2x,https://gdurl.com/XV3f 1x, https://gdurl.com/XV3f 3x'
 						alt='logo'
 						w={imageSize}
 					/>
-					<Flex display={{ base: "none", md: "flex" }} ml={20}
-						align={"center"} justify={"flex-end"} w={{ base: "100%", md: "50%" }}
+					<Flex
+						display={{ base: "none", md: "flex" }}
+						ml={20}
+						align={"center"}
+						justify={"flex-end"}
+						w={{ base: "100%", md: "50%" }}
 						mr={{ base: "none", md: "5" }}
-					// border='1px solid red'
+						// border='1px solid red'
 					>
 						{/* <DesktopNav /> */}
-						<Input placeholder="Search deco-ninja.com" type='text'
+						<Input
+							placeholder='Search deco-ninja.com'
+							type='text'
 							bg={useColorModeValue("gray.100", "gray.900")}
 							border={0}
-							rounded={'none'}
+							rounded={"none"}
 							_placeholder={{
-								color: useColorModeValue("gray.500", "gray.400"),
+								color: useColorModeValue(
+									"gray.500",
+									"gray.400"
+								),
 							}}
 							px={4}
 							py={2}
@@ -122,48 +128,63 @@ export default function NavMid() {
 							onClick={() => setShow(!show)}
 							onChange={(e) => setValue(e.target.value)}
 						/>
-						<Button rounded={'none'} bg={useColorModeValue("gray.100", "gray.900")} _hover={{ bg: `{useColorModeValue("gray.100", "gray.900")}` }}
-						onClick={handleClick}
-						>
+						<Button
+							rounded={"none"}
+							bg={useColorModeValue("gray.100", "gray.900")}
+							_hover={{
+								bg: `{useColorModeValue("gray.100", "gray.900")}`,
+							}}
+							onClick={handleClick}>
 							<VscSearch size='1.2rem' color='gray.500' />
 						</Button>
-						<VStack spacing='0' mr='1rem'
-						  display={show? 'none' : 'block'}
-							position={'absolute'}
-							left={state.isAuth ? '31.4%' :"32.6%"}
+						<VStack
+							spacing='0'
+							mr='1rem'
+							display={show ? "none" : "block"}
+							position={"absolute"}
+							left={state.isAuth ? "31.4%" : "32.6%"}
 							top='175'
 							right='initial'
-							width={state.isAuth ? '24.6%' : "27.2%"}
+							width={state.isAuth ? "24.6%" : "27.2%"}
 							zIndex={800}
 							boxShadow='0 0 10px 0 rgba(0,0,0,0.2)'
 							bg={useColorModeValue("gray.100", "root.blueGray")}
-							py={2}
-						>
+							py={2}>
 							<Text
-							  w = '100%'
-								fontSize={'md'}
+								w='100%'
+								fontSize={"md"}
 								px={4}
 								py={2}
 								mb='3'
 								casing='uppercase'
 								color='#7c8695'
-								borderBottom='2px solid green'
-							>Tending Searches</Text>
+								borderBottom='2px solid green'>
+								Tending Searches
+							</Text>
 							{searchArray.map((item) => {
 								return (
-									<option value={item.name} key={item.id}
+									<option
+										value={item.name}
+										key={item.id}
 										onClick={() => setValue(item.name)}
 										style={{
-											width : '100%',
-											display: 'flex',
-											alignItems: 'center',
-											padding: '0.4rem 1rem',
-											fontSize: '1rem',
-											color: '#7c8695',
-											cursor: 'pointer',
-										}}
-									> <VscSearch size='1.2rem' color='gray.500' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.name}</option>
-								)
+											width: "100%",
+											display: "flex",
+											alignItems: "center",
+											padding: "0.4rem 1rem",
+											fontSize: "1rem",
+											color: "#7c8695",
+											cursor: "pointer",
+										}}>
+										{" "}
+										<VscSearch
+											size='1.2rem'
+											color='gray.500'
+										/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										{item.name}
+									</option>
+								);
 							})}
 						</VStack>
 					</Flex>
@@ -178,28 +199,42 @@ export default function NavMid() {
 					direction={"row"}
 					spacing={{ base: 6, md: 8, lg: 10 }}
 					// border='1px solid red'
-					color={useColorModeValue("root.green", "gray.400")}
-				>
-					<Switch size='md' onChange={toggleColorMode}
-					colorScheme={'green'}></Switch>
+					color={useColorModeValue("root.green", "gray.400")}>
+					<Switch
+						size='md'
+						onChange={toggleColorMode}
+						colorScheme={"green"}></Switch>
 					<HStack
-						pos={'relative'}
+						pos={"relative"}
 						right='1rem'
 						display={{ base: "none", md: "flex" }}
-						w='60px'
-					>
+						w='60px'>
 						<Text>Shop</Text>
-						<Image src='https://www.dollartree.com/file/general/dt_plus_pdp_plp_200x70.png' w='20' h='6' />
+						<Image
+							src='https://www.dollartree.com/file/general/dt_plus_pdp_plp_200x70.png'
+							w='20'
+							h='6'
+						/>
 					</HStack>
 					<Signup />
-					<VStack spacing='0'
-					 pos={'relative'}
-					 right='0.6rem'
-					 onClick={() => navigate('/cart')}
-					 cursor='pointer'
-					>
+					<VStack
+						spacing='0'
+						pos={"relative"}
+						top='-0.5rem'
+						right='0.6rem'
+						onClick={() => navigate("/cart")}
+						cursor='pointer'>
+						<Circle
+							position={"relative"}
+							top='0.5rem'
+							right='-0.7rem'
+							bg={useColorModeValue("root.green", "gray.400")}
+							color={useColorModeValue("white", "white")}
+							size='1rem'>
+							<Text fontSize={"xs"}>{state.cartTotal}</Text>
+						</Circle>
 						<AiOutlineShoppingCart size='1.5rem' />
-						<Text fontSize={'xs'}>Cart</Text>
+						<Text fontSize={"xs"}>Cart</Text>
 					</VStack>
 				</Stack>
 			</Flex>
@@ -228,9 +263,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 	const { isOpen, onToggle } = useDisclosure();
 
 	return (
-		<Stack spacing={4} onClick={children && onToggle}
-
-		>
+		<Stack spacing={4} onClick={children && onToggle}>
 			<Flex
 				py={2}
 				as={Link}
@@ -260,12 +293,16 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 				in={isOpen}
 				animateOpacity
 				style={{ marginTop: "0!important" }}>
-				<Stack
-					pl={4}
-					align={"start"}>
+				<Stack pl={4} align={"start"}>
 					{children &&
 						children.map((child) => (
-							<Link key={child.label}  to={'/inventory'} color={useColorModeValue("gray.600", "gray.400")}>
+							<Link
+								key={child.label}
+								to={"/inventory"}
+								color={useColorModeValue(
+									"gray.600",
+									"gray.400"
+								)}>
 								{child.label}
 							</Link>
 						))}

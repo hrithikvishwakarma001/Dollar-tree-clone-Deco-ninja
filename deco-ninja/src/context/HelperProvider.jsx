@@ -11,6 +11,7 @@ const inintalState = {
   page: 1,
   searchValue: '',
   cartItems: [],
+	cartTotal: 0,
 };
 
 const reducer = (state, action) => {
@@ -67,8 +68,14 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				loading: false,
-				cartItems: [...state.cartItems, payload],
+				cartItems: [payload, ...state.cartItems],
 			};
+		case "CART_TOTAL": 
+		return {
+			...state,
+				loading: false,
+				cartTotal: payload
+		}
 		default:
 			return state;
 	}
