@@ -11,7 +11,7 @@ const Home = () => {
 	React.useEffect(() => {
 		const cartCount = cartItems ? cartItems.length : 0;
 		dispatch({ type: "CART_TOTAL", payload: cartCount });
-	}, [cartItems]);
+	}, []);
 	return (
 		<>
 			<Container

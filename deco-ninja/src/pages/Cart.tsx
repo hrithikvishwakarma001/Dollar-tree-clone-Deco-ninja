@@ -34,23 +34,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Mousewheel } from "swiper";
-
+import { Scrollbar } from "swiper";
 const Cart = () => {
-	const { dispatch } = React.useContext(HelperContext);
+	const { dispatch, state } = React.useContext(HelperContext);
+	const [show, setShow] = React.useState(false);
+	const [show2, setShow2] = React.useState(false);
 	const navigate = useNavigate();
-	const cartItems = JSON.parse(
-		localStorage.getItem("cart") || "[]"
-	).reverse();
+	const coupon = React.useRef<HTMLInputElement>(null);
+	const subTotal = state.cartItems.reduce((acc: number, item: any) => {
+		const price = item.price.slice(3).replace(/,/g, "") - 0;
+		return acc + price;
+	}, 0);
+	const [total, setTotal] = React.useState(subTotal);
 
-	React.useEffect(() => {
-		dispatch({ type: "CART_TOTAL", payload: cartItems.length });
-		if (cartItems.length > 0) {
-			document.title = `Deco-ninja/cart (${cartItems.length})`;
-		} else {
-			document.title = `Deco-ninja cart`;
+	const handleCoupon = () => {
+		if (coupon?.current?.value === "deco30") {
+			setShow2(true);
+			setTotal(Math.floor(subTotal - subTotal * 0.3));
 		}
-	}, [cartItems]);
-
+	};
 	return (
 		<Container maxW={{ base: "100%", md: "90%", lg: "72%" }}>
 			<Box>
@@ -180,20 +182,142 @@ const Cart = () => {
 						<Text>QUANTITY</Text>
 						<Text>PRICE</Text>
 					</Flex>
-					<Swiper
-						direction={"vertical"}
-						slidesPerView={3}
-						spaceBetween={5}
-						mousewheel={true}
-						modules={[Mousewheel]}
-						className='mySwiper'>
-						{cartItems.map((item: any) => (
-							<SwiperSlide>
-								<CartItem item={item} />
-							</SwiperSlide>
-						))}
-					</Swiper>
+					{total ? (
+						<Swiper
+							direction={"vertical"}
+							slidesPerView={3}
+							spaceBetween={5}
+							mousewheel={true}
+							modules={[Mousewheel, Scrollbar]}
+							className='mySwiper'>
+							{state.cartItems.map((item: any, index: number) => (
+								<SwiperSlide>
+									<CartItem item={item} index={index} />
+								</SwiperSlide>
+							))}
+						</Swiper>
+					) : (
+						<Center>
+							<Image
+			   				w='75%'
+								 src='https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png'
+							/>
+						</Center>
+					)}
 				</Box>
+			</Box>
+			<Box mt='6'>
+				<Flex
+					justify={"space-between"}
+					direction={{ base: "column", md: "row" }}>
+					<VStack w='395px' spacing={8}>
+						<Text fontSize={"sm"}>
+							In-Store Estimated Pick-Up dates are valid for
+							orders placed before 9:30 p.m. ET.
+						</Text>
+						<Text fontSize={"sm"}>
+							If your order is placed after 9:30 p.m. ET, the
+							Estimated Pick-Up date noted on your{" "}
+							<b>Order Confirmation email </b> is not guaranteed
+							and could vary. Once your order has been shipped,
+							your <b>Shipment Confirmation email </b> will
+							include the confirmed Estimated Pick-Up date.
+						</Text>
+					</VStack>
+					<VStack
+						align={"flex-start"}
+						w='350px'
+						spacing={8}
+						p='4'
+						mt={{ base: "4", md: "0" }}>
+						<Box>
+							<Text
+								display={"flex"}
+								alignItems={"center"}
+								justifyContent={"space-between"}
+								w={"320px"}
+								fontSize={"lg"}
+								bg='#edf1e7'
+								p='2'
+								color='root.green'
+								fontWeight='semibold'>
+								{" "}
+								Add Promo Code
+								<Button
+									mr='2'
+									onClick={() => setShow(!show)}
+									colorScheme={"blue"}
+									rounded={"full"}
+									size='xs'
+									p='0'
+									fontSize={"md"}>
+									+
+								</Button>
+							</Text>
+							<Flex
+								h='40px'
+								transition={"all 0.3s ease"}
+								display={show ? "flex" : "none"}>
+								<Input
+									type='text'
+									placeholder='deco30'
+									h='full'
+									rounded={"none"}
+									ref={coupon}
+								/>
+								<Button
+								 disabled={show2}
+									rounded={"none"}
+									size='sm'
+									colorScheme='blue'
+									h='full'
+									onClick={handleCoupon}>
+									Apply
+								</Button>
+							</Flex>
+						</Box>
+						<Text fontSize={"xl"} borderBottom='1px solid #edf1e7'>
+							Order Summary
+						</Text>
+						<Flex
+							justifyContent={"space-between"}
+							w='full'
+							borderBottom='1px solid #edf1e7'>
+							<Text>Items In Your Cart:</Text>
+							<Text>{state.cartItems.length}</Text>
+						</Flex>
+						<Flex
+							justifyContent={"space-between"}
+							w='full'
+							borderBottom='1px solid #edf1e7'>
+							<Text>Shipping:</Text>
+							<Text>--</Text>
+						</Flex>
+						<Flex
+							justifyContent={"space-between"}
+							w='full'
+							borderBottom='1px solid #edf1e7'>
+							<Text>Estimated Tax:</Text>
+							<Text>Rs 5.00</Text>
+						</Flex>
+						<Flex
+							justifyContent={"space-between"}
+							w='full'
+							borderBottom='1px solid #edf1e7'>
+							<Text>ESTIMATED TOTAL:</Text>
+							<Text>
+								Rs.{total} + 5 = Rs.{total + 5}
+							</Text>
+						</Flex>
+						<Button
+							w='full'
+							bg='root.green'
+							color='white'
+							_hover={{ bg: "green.500" }}>
+							PROCEED TO CHECKOUT
+						</Button>
+					</VStack>
+				</Flex>
 			</Box>
 		</Container>
 	);

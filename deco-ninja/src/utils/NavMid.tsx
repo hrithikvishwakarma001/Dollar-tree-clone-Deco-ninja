@@ -231,7 +231,7 @@ export default function NavMid() {
 							bg={useColorModeValue("root.green", "gray.400")}
 							color={useColorModeValue("white", "white")}
 							size='1rem'>
-							<Text fontSize={"xs"}>{state.cartTotal}</Text>
+							<Text fontSize={"xs"}>{state.cartItems.length}</Text>
 						</Circle>
 						<AiOutlineShoppingCart size='1.5rem' />
 						<Text fontSize={"xs"}>Cart</Text>

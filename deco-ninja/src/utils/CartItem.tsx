@@ -18,12 +18,15 @@ import {
 	Text,
 	useColorModeValue,
 	useNumberInput,
+	useToast,
 	VStack,
 } from "@chakra-ui/react";
 
 import React from "react";
-export function CartItem({item}:any) {
-
+import { HelperContext } from "../context/HelperProvider";
+export function CartItem({item,index}:{item:any,index:number}) {
+    const {dispatch} = React.useContext(HelperContext)
+		const toast = useToast();
   	const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
 		useNumberInput({
 			defaultValue: 1,
@@ -33,7 +36,7 @@ export function CartItem({item}:any) {
 	const inc = getIncrementButtonProps();
 	const dec = getDecrementButtonProps();
 	const input = getInputProps();
-
+  
 	const {
 		title,
 		price,
@@ -43,6 +46,18 @@ export function CartItem({item}:any) {
 		articleCode,
 	} = item;
    
+   const handleRemove = () => {
+		dispatch({ type: "REMOVE_FROM_CART", payload: index });
+		    toast({
+				title: "Item removed.",
+				description: "Item removed from cart.",
+				status: "success",
+				duration: 800,
+				isClosable: true,
+			});
+	};
+
+
 	return (
 		<Flex
 			cursor='grab'
@@ -140,45 +155,59 @@ export function CartItem({item}:any) {
 					<Radio value='2'>UPS Delivery</Radio>
 				</VStack>
 			</RadioGroup>
-			<HStack
-				mb={{
-					base: "3",
-					md: "0",
-				}} // border={"1px"}
-				w={{
-					base: "100%",
-					md: "130px",
-					lg: "130px",
-				}}>
-				<Button
-					size={{
-						base: "lg",
-						md: "sm",
-						lg: "sm",
-					}}
-					{...dec}
-					colorScheme='red'>
-					-
-				</Button>
-				<Input
-					{...input}
-					size={{
-						base: "lg",
-						md: "sm",
-						lg: "sm",
-					}}
-				/>
-				<Button
-					size={{
-						base: "lg",
-						md: "sm",
-						lg: "sm",
-					}}
-					{...inc}
-					colorScheme='green'>
-					+
-				</Button>
-			</HStack>
+			<Box>
+				<Text fontSize={"md"} fontWeight='semibold' mb='2'>
+					Units
+				</Text>
+				<HStack
+					mb={{
+						base: "3",
+						md: "0",
+					}} // border={"1px"}
+					w={{
+						base: "100%",
+						md: "130px",
+						lg: "130px",
+					}}>
+					<Button
+						size={{
+							base: "lg",
+							md: "sm",
+							lg: "sm",
+						}}
+						{...dec}
+						colorScheme='red'>
+						-
+					</Button>
+					<Input
+						{...input}
+						size={{
+							base: "lg",
+							md: "sm",
+							lg: "sm",
+						}}
+					/>
+					<Button
+						size={{
+							base: "lg",
+							md: "sm",
+							lg: "sm",
+						}}
+						{...inc}
+						colorScheme='green'>
+						+
+					</Button>
+				</HStack>
+				<Text
+				 onClick={handleRemove}
+				  cursor={"pointer"}
+					fontSize={"md"}
+					fontWeight='semibold'
+					mt='2'
+					color='root.green'>
+					Remove
+				</Text>
+			</Box>
 			<Text fontWeight={"semibold"} color='root.green' fontSize={"sm"}>
 				{price}
 			</Text>
