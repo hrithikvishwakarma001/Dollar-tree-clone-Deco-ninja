@@ -15,6 +15,22 @@
 ## responsive
 ![collage](https://user-images.githubusercontent.com/104666876/221429103-d7de9083-bd98-4ba9-b3c1-f2d4a8a791f4.png)
 
+>Functionalities Implemented
+
+- Login and Signup
+- Storing the user data
+- Shows Number of products already Present in Cart
+- Dynamic Population of Products in Filter Page
+
+>In Cart
+
+- Select the Quantity, cart value to be modified Accordingly
+- Delete the Product, if not required
+
+>We're Here For You. 🔥
+
+Buying a new product should be fun, rewarding and easy, and we are committed to providing you with service above and beyond what is expected. If you need help, give us a call!
+
 # About
 
 >Deco ninja, Inc. is a customer-oriented, value-driven variety store. We will operate profitably, empower our associates to share in its opportunities, rewards and successes; and deal with others in an honest and considerate way. The company's mission will be consistent with measured and profitable growth.
