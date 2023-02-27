@@ -5,7 +5,7 @@ import Inventory from "../components/Inventory";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import ScrollTopButton from "../utils/ScrollTopButton";
-
+import AdminPage from "../pages/AdminPage";
 const AllRoutes = () => {
 	return (
 		<>
@@ -15,6 +15,7 @@ const AllRoutes = () => {
 				<Route path='/login' element={<Login />} />
 				<Route path='/inventory' element={<Inventory />} />
 				<Route path='/Cart' element={<Cart />} />
+				<Route path='/admin' element={<AdminPage />} />
 				<Route path='*' element={<h1>404</h1>} />
 			</Routes>
 		</>

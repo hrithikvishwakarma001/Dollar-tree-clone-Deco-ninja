@@ -79,7 +79,10 @@ export function CartItem({item,index}:{item:any,index:number}) {
 			display={{
 				base: "box",
 				md: "flex",
-			}}>
+			}}
+			w={{base:"100%",md:"100%",lg:"100%"}}
+			mx='auto'
+			>
 			<Flex // border={'1px'}
 				flex={0.6}
 				w='100%'

@@ -45,40 +45,53 @@ export default function Signup() {
 			email: email?.current?.value,
 			password: password?.current?.value
 		}
-		const fetchData = async (data: User) => {
-			const response = await fetch('https://diagnostic-boiled-shift.glitch.me/users');
-			const user = await response.json();
-			const check = user.filter((user: User) => user.email === data.email && user.password === data.password);
-			if (check.length > 0) {
-				localStorage.setItem('user', JSON.stringify(check[0]));
-				dispatch({ type: 'LOGIN' })
-				navigate('/');
+		if(data.email=='admin@gmail.com' && data.password=='admin1432') {
+		    dispatch({type:'ADMIN'})
 				toast({
-					title: 'Account created.',
-					description: 'We\'ve created your account for you.',
+					title: 'Admin login.',
+					description: 'You are logged in as admin.',
 					status: 'success',
-					duration: 4000,
+					duration: 1000,
 					isClosable: true,
 				})
-				onClose();
-			} else if(data.email.length==0 || data.password.length==0) {
-				toast({
-					description: 'Please fill all the fields.',
-					status: 'warning',
-					duration: 4000,
-					isClosable: true,
-				})
-			} else {
-				toast({
-					title: 'Account not found.',
-					description: 'We could not find an account',
-					status: 'error',
-					duration: 4000,
-					isClosable: true,
-				})
+				onClose()
+				navigate('/admin')
+		}else{
+			const fetchData = async (data: User) => {
+				const response = await fetch('https://diagnostic-boiled-shift.glitch.me/users');
+				const user = await response.json();
+				const check = user.filter((user: User) => user.email === data.email && user.password === data.password);
+				if (check.length > 0) {
+					localStorage.setItem('user', JSON.stringify(check[0]));
+					dispatch({ type: 'LOGIN' })
+					navigate('/');
+					toast({
+						title: 'Account created.',
+						description: 'We\'ve created your account for you.',
+						status: 'success',
+						duration: 4000,
+						isClosable: true,
+					})
+					onClose();
+				} else if(data?.email?.length==0 || data?.password?.length==0) {
+					toast({
+						description: 'Please fill all the fields.',
+						status: 'warning',
+						duration: 4000,
+						isClosable: true,
+					})
+				} else {
+					toast({
+						title: 'Account not found.',
+						description: 'We could not find an account',
+						status: 'error',
+						duration: 4000,
+						isClosable: true,
+					})
+				}
 			}
+			fetchData(data)
 		}
-		fetchData(data)
 	}
 
 	const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -133,7 +146,7 @@ export default function Signup() {
 								</List>
 							</VStack>
 							<FormControl>
-								<FormLabel>First name</FormLabel>
+								<FormLabel>Email</FormLabel>
 								<Input ref={email} placeholder='Email address'
 									type={'email'}
 									_focusVisible={{
@@ -142,7 +155,7 @@ export default function Signup() {
 								/>
 							</FormControl>
 							<FormControl mt={4}>
-								<FormLabel>Last name</FormLabel>
+								<FormLabel>Password</FormLabel>
 								<Input placeholder='password' _focusVisible={{
 									borderColor: 'root.green',
 								}}

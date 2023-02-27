@@ -11,6 +11,7 @@ const inintalState = {
   page: 1,
   searchValue: '',
   cartItems: [],
+	admin:false
 };
 
 const reducer = (state, action) => {
@@ -74,6 +75,11 @@ const reducer = (state, action) => {
 				...state,
 				loading: false,
 				cartItems: state.cartItems.filter((_,index) => index !== payload),
+			};
+		case "ADMIN":
+			return {
+				...state,
+				admin: true,
 			};
 		default:
 			return state;

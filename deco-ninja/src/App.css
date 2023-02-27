@@ -16,13 +16,14 @@
 
 @media (300px <= width <= 812px) {
     .mySwiper{
-        height: 300vh;
+        width: 80%;
+        height: 260vh;
     }
 }
 
 @media (420px <= width <= 812px) {
     .mySwiper{
-        height: 290vh;
+        height: 300vh;
     }
 }
 

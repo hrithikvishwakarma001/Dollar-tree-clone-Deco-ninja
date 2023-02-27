@@ -72,6 +72,14 @@ export default function SlidesCard({ title, price, src, padding, singleData }: {
       duration: 800,
       isClosable: true,
     })
+		const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+		if(cart){
+			const newCart = [product,...cart];
+			localStorage.setItem('cart', JSON.stringify(newCart));
+		}else{
+			localStorage.setItem('cart', JSON.stringify([product]));
+		}
+
    const boolean = state.cartItems.some(
 		(item: any) => item.articalCode === product.articalCode
    );

@@ -199,8 +199,8 @@ const Cart = () => {
 					) : (
 						<Center>
 							<Image
-			   				w='75%'
-								 src='https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png'
+								w='75%'
+								src='https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png'
 							/>
 						</Center>
 					)}
@@ -210,7 +210,7 @@ const Cart = () => {
 				<Flex
 					justify={"space-between"}
 					direction={{ base: "column", md: "row" }}>
-					<VStack w='395px' spacing={8}>
+					<VStack w={{ base: "full", md: "395px" }} spacing={8}>
 						<Text fontSize={"sm"}>
 							In-Store Estimated Pick-Up dates are valid for
 							orders placed before 9:30 p.m. ET.
@@ -226,7 +226,7 @@ const Cart = () => {
 					</VStack>
 					<VStack
 						align={"flex-start"}
-						w='350px'
+						w={{ base: "full", md: "350px" }}
 						spacing={8}
 						p='4'
 						mt={{ base: "4", md: "0" }}>
@@ -235,7 +235,7 @@ const Cart = () => {
 								display={"flex"}
 								alignItems={"center"}
 								justifyContent={"space-between"}
-								w={"320px"}
+								w={{ base: "310px", md: "320px" }}
 								fontSize={"lg"}
 								bg='#edf1e7'
 								p='2'
@@ -266,7 +266,7 @@ const Cart = () => {
 									ref={coupon}
 								/>
 								<Button
-								 disabled={show2}
+									disabled={show2}
 									rounded={"none"}
 									size='sm'
 									colorScheme='blue'
