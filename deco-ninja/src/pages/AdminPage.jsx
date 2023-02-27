@@ -59,7 +59,7 @@ const AdminPage = () => {
 						justifyContent={"space-around"}
 						px='50'>
 						<Tab>User Details</Tab>
-						<Tab>Booking Details</Tab>
+						<Tab>Cart History</Tab>
 					</TabList>
 					<TabPanels>
 						<TabPanel>
