@@ -60,6 +60,7 @@ export default function NavMid() {
 			navigate("/inventory");
 			setShow(!show);
 		}
+		setValue("");
 	};
 	return (
 		<>
@@ -104,6 +105,7 @@ export default function NavMid() {
 						w={{ base: "100%", md: "50%" }}
 						mr={{ base: "none", md: "5" }}
 						// border='1px solid red'
+						position='relative'
 					>
 						{/* <DesktopNav /> */}
 						<Input
@@ -142,10 +144,12 @@ export default function NavMid() {
 							mr='1rem'
 							display={show ? "none" : "block"}
 							position={"absolute"}
-							left={state.isAuth ? "31.4%" : "32.6%"}
-							top='175'
-							right='initial'
-							width={state.isAuth ? "24.6%" : "27.2%"}
+
+							// left={state.isAuth ? "31.4%" : "32.6%"}
+							top='85'
+							w='100%'
+							left={0}
+							// width={state.isAuth ? "24.6%" : "27.2%"}
 							zIndex={800}
 							boxShadow='0 0 10px 0 rgba(0,0,0,0.2)'
 							bg={useColorModeValue("gray.100", "root.blueGray")}
