@@ -87,10 +87,12 @@ const reducer = (state, action) => {
 };
 
 const HelperProvider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(reducer, inintalState);
+	const [state, dispatch] = React.useReducer(reducer, inintalState);
+	// dispatch({type:SUCCESS,payload:data})
 	return (
-		<HelperContext.Provider value={{ state, dispatch }}
-    >{children}</HelperContext.Provider>
+		<HelperContext.Provider value={{ state, dispatch }}>
+			{children}
+		</HelperContext.Provider>
 	);
 };
 

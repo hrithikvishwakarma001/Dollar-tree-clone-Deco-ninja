@@ -6,7 +6,12 @@ import "./index.css";
 import { extendTheme } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import HelperProvider from "./context/HelperProvider";
+const config = {
+	initialColorMode: "light",
+	useSystemColorMode: false,
+};
 const theme = extendTheme({
+	config,
 	colors: {
 		root: {
 			green: "#12823b",
@@ -20,7 +25,7 @@ const theme = extendTheme({
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<BrowserRouter>
 		<ChakraProvider theme={theme}>
-			<ColorModeScript initialColorMode='#fafafa' />
+			<ColorModeScript initialColorMode={theme.config.initialColorMode} />
 			<HelperProvider>
 				<App />
 			</HelperProvider>

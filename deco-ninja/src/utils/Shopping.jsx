@@ -51,8 +51,9 @@ const [limit, setLimit] = React.useState(9);
 			<Grid
 				templateColumns={{
 					base: "repeat(1,1fr)",
-					md: "repeat(2,1fr)",
-					lg: "repeat(3,1fr)",
+					md: "repeat(1,1fr)",
+					lg: "repeat(2,1fr)",
+					xl: "repeat(3,1fr)",
 				}}
 				gap={{ base: "1rem", md: "1rem", lg: "2rem" }}
 				w={{ base: "90%", md: "100%", lg: "100%" }}

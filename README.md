@@ -34,3 +34,7 @@ Buying a new product should be fun, rewarding and easy, and we are committed to 
 # About
 
 >Deco ninja, Inc. is a customer-oriented, value-driven variety store. We will operate profitably, empower our associates to share in its opportunities, rewards and successes; and deal with others in an honest and considerate way. The company's mission will be consistent with measured and profitable growth.
+
+
+## UPDATES 
+> 1.0.1 date: 07/07/2023

@@ -93,7 +93,7 @@ export default function NavMid() {
 						onClick={() => navigate("/")}
 						cursor='pointer'
 						// mr={{ base: "5rem", md: "0" }}
-						srcSet='https://gdurl.com/AkqI 2x,https://gdurl.com/XV3f 1x, https://gdurl.com/XV3f 3x'
+						srcSet='https://gdurl.com/AkqI 1000w, https://gdurl.com/XV3f 500w, https://gdurl.com/AnotherURL sizeInPixelsw'
 						alt='logo'
 						w={imageSize}
 					/>
@@ -105,8 +105,7 @@ export default function NavMid() {
 						w={{ base: "100%", md: "50%" }}
 						mr={{ base: "none", md: "5" }}
 						// border='1px solid red'
-						position='relative'
-					>
+						position='relative'>
 						{/* <DesktopNav /> */}
 						<Input
 							placeholder='Search deco-ninja.com'
@@ -144,7 +143,6 @@ export default function NavMid() {
 							mr='1rem'
 							display={show ? "none" : "block"}
 							position={"absolute"}
-
 							// left={state.isAuth ? "31.4%" : "32.6%"}
 							top='85'
 							w='100%'
@@ -235,7 +233,9 @@ export default function NavMid() {
 							bg={useColorModeValue("root.green", "gray.400")}
 							color={useColorModeValue("white", "white")}
 							size='1rem'>
-							<Text fontSize={"xs"}>{state.cartItems.length}</Text>
+							<Text fontSize={"xs"}>
+								{state.cartItems.length}
+							</Text>
 						</Circle>
 						<AiOutlineShoppingCart size='1.5rem' />
 						<Text fontSize={"xs"}>Cart</Text>
